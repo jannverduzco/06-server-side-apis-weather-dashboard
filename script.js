@@ -27,7 +27,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (weatherRes) {
 
-            var temp = ((weatherRes.main.temp - 273.15) * 1.80 + 32).toFixed(2);
+            var temp = ((weatherRes.main.temp - 273.15) * 1.80 + 32).toFixed(0);
             // console.log(temp)
             var humidity = weatherRes.main.humidity;
             // console.log(humidity)
@@ -38,10 +38,13 @@ $(document).ready(function () {
             var lat = weatherRes.coord.lat;
             // console.log(lat)
             cityUV(lat, lon)
+            var cityName = weatherRes.name;
+            // console.log(cityName)
 
-             $(".temp").text(temp);
-             $(".humidity").text(humidity);
-             $(".wind-speed").text(windSpeed);
+            $(".city-name").html("<h2>" + cityName + "<h2>");
+             $(".temp").text("Temperature: " + temp + "°F");
+             $(".humidity").text("Humidity: " + humidity + "%");
+             $(".wind-speed").text("Wind Speed: " + windSpeed + "MPH");
              
 
         })
@@ -60,7 +63,7 @@ $(document).ready(function () {
             // console.log(coordRes)
             var uvIndex = coordRes.value;
             // console.log(uvIndex)
-            $(".uv-index").text(uvIndex)
+            $(".uv-index").text("UV Index: " + uvIndex)
         })
 
         
