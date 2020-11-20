@@ -4,14 +4,20 @@ $(document).ready(function () {
 
     // global api key
     var apiKey = "&appid=463e991c43d34445395b82d02c5b4287"
+    var cityHist = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
-    
+
     // LISTENERS
     // =======================================================================================
 
     // search button listener 
     $("#searchBtn").on("click", function (event) {
+        event.preventDefault()
         var citySearch = $("#city-search").val()
+        if (!cityHist.includes(citySearch)) {
+        cityHist.unshift(citySearch)
+        localStorage.setItem("cityHistory", JSON.stringify(cityHist))
+        }
         // cityWeather function call
         cityWeather(citySearch)
     })
@@ -48,9 +54,7 @@ $(document).ready(function () {
             $(".humidity").text("Humidity: " + weatherRes.main.humidity + "%");
             $(".wind-speed").text("Wind Speed: " + weatherRes.wind.speed + "MPH");
 
-
         })
-
     }
 
     // cityUV function with query url of  openweather uvi api
@@ -68,10 +72,13 @@ $(document).ready(function () {
             // tranfering content to HTML
             $(".uv-index").text("UV Index: " + uvIndex)
         })
-
-
-
     }
+
+    // store seached cities history
+
+    
+
+
 
 
 
