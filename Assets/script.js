@@ -30,10 +30,8 @@ $(document).ready(function () {
        
     })
 
-
     // FUNCTIONS
     // =======================================================================================
-
 
     // cityWeather function
     function cityWeather(city) {
@@ -58,7 +56,7 @@ $(document).ready(function () {
             var cityName = weatherRes.name;
 
             // tranfering content to HTML
-            $(".city-name").html("<h2>" + weatherRes.name + "(" + date + ")" + "<h2>");
+            $(".city-name").text(weatherRes.name + "(" + date + ")");
             $(".city-name").append(`<img src="http://openweathermap.org/img/wn/${weatherRes.weather[0].icon}@2x.png"/>`)
             $(".temp").text("Temperature: " + temp + "°F");
             $(".humidity").text("Humidity: " + weatherRes.main.humidity + "%");
@@ -98,17 +96,37 @@ $(document).ready(function () {
             var cityList = this.textContent;
             cityWeather(cityList)
         })
-
-    
     }
 
     displayPastCities();
 
+    // forcast weather function
+    function forecastWeather(forecast) {
+        // this is the built url we can  query
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + forecast + apiKey;
+        // console.log(queryURL)
+
+        // running ajax call to the openweather API
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+            // storing all the retrieved data inside function called "forecastRes"
+        }).then(function (forecastRes) {
+    
+            var icon = forecastRes.weather[0].icon;
+            // retrieving temp and  converting it from Kelvin to fahrenheit 
+            var temp = ((forecastRes.main.temp - 273.15) * 1.80 + 32).toFixed(0);
+            var humidity = forecastRes.main.humidity;
+            var tomorrowDate = moment().add(i, "days").format("l")
+            console.log(icon)
+            console.log(temp)
+            console.log(humidity)
 
 
-
-
-
+            // tranfering content to HTML
+         
+        }); 
+        }
 });
 
 
