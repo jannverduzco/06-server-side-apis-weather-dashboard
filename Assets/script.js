@@ -25,9 +25,11 @@ $(document).ready(function () {
             displayPastCities();
         }
 
-        // cityWeather function call
+        // cityWeather function(line 39) call
         cityWeather(citySearch)
-       
+        // forecastWeather function(line 120 ) call
+        forecastWeather(citySearch)
+
     })
 
     // FUNCTIONS
@@ -67,6 +69,7 @@ $(document).ready(function () {
 
     // cityUV function with query url of  openweather uvi api
     function cityUV(lat, lon) {
+
         var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + apiKey;
         // console.log(queryURL)
         // running ajax call to the openweather API
@@ -79,31 +82,44 @@ $(document).ready(function () {
             var uvIndex = coordRes.value
             // tranfering content to HTML
             $(".uv-index").text("UV Index: " + uvIndex)
+            // if { green
+
+            // }
+            // else if {yellow
+
+            // }
+            // else {red
+
+            // }
         })
     }
 
     // dispaly searched cities
     function displayPastCities() {
         var allCities = "";
-
+        // for loop to go through all cities searched for
         for (var i = 0; i < cityHist.length; i++) {
-               
             allCities += `<div class = "row"><button class="cityButton">${cityHist[i]}</button></div>`;
-           
         }
+        // tranfer allcities array to HTML
         $("#cities-searched-display").html(allCities);
+        // listener that displays weather for city button clicked
         $(".cityButton").on("click", function () {
             var cityList = this.textContent;
+            
+            // cityWeather function(line 39) call
             cityWeather(cityList)
-        })
-    }
+             // forecastWeather function(line 120 ) call
+            forecastWeather(cityList)
 
+    }
+    // displayPastCities(line 97) funtion called
     displayPastCities();
 
     // forcast weather function
     function forecastWeather(forecast) {
         // this is the built url we can  query
-        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + forecast + apiKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + forecast + apiKey;
         // console.log(queryURL)
 
         // running ajax call to the openweather API
@@ -112,21 +128,26 @@ $(document).ready(function () {
             method: "GET"
             // storing all the retrieved data inside function called "forecastRes"
         }).then(function (forecastRes) {
-    
-            var icon = forecastRes.weather[0].icon;
-            // retrieving temp and  converting it from Kelvin to fahrenheit 
-            var temp = ((forecastRes.main.temp - 273.15) * 1.80 + 32).toFixed(0);
-            var humidity = forecastRes.main.humidity;
-            var tomorrowDate = moment().add(i, "days").format("l")
-            console.log(icon)
-            console.log(temp)
-            console.log(humidity)
+            // for loop to go though the 5 forcasted days
+            for (var i = 1; i < 6; i++) {
+                var icon = forecastRes.list[i].weather[0].icon;
+                // retrieving temp and  converting it from Kelvin to fahrenheit 
+                var temp = ((forecastRes.list[i].main.temp - 273.15) * 1.80 + 32).toFixed(0);
+                var humidity = forecastRes.list[i].main.humidity;
+                var tomorrowDate = moment().add(i, "days").format("l")
+                console.log(icon)
+                // console.log(temp)
+                // console.log(humidity)
 
+                //tranfering content to HTML
+                $("#" + "date" + i).text(tomorrowDate);
+                $("#" + "icon" + i).append(`<img src="http://openweathermap.org/img/wn/${icon}@2x.png"/>`);
+                $("#" + "temp" + i).text("Temp: " + temp);
+                $("#" + "humidity" + i).text("Humidity: " + humidity);
+            }
 
-            // tranfering content to HTML
-         
-        }); 
-        }
+        });
+    }
 });
 
 
