@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     // global api key
     var apiKey = "&appid=463e991c43d34445395b82d02c5b4287"
+    // city search array
     var cityHist = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 
@@ -14,10 +15,14 @@ $(document).ready(function () {
     $("#searchBtn").on("click", function (event) {
         event.preventDefault()
         var citySearch = $("#city-search").val()
+        // pevernt from local storing same city multiple times
         if (!cityHist.includes(citySearch)) {
-        cityHist.unshift(citySearch)
-        localStorage.setItem("cityHistory", JSON.stringify(cityHist))
+            // pushes new search to the front/top
+            cityHist.unshift(citySearch)
+            //converts cityHist array to string and setItem in storage   
+            localStorage.setItem("cityHistory", JSON.stringify(cityHist))
         }
+
         // cityWeather function call
         cityWeather(citySearch)
     })
@@ -54,7 +59,12 @@ $(document).ready(function () {
             $(".humidity").text("Humidity: " + weatherRes.main.humidity + "%");
             $(".wind-speed").text("Wind Speed: " + weatherRes.wind.speed + "MPH");
 
-        })
+            // dispaly searched cities
+            for (var i = 0; i < cityHist.length; i++) {
+                $("cities-searched-display").val(localStorage.getItem(cityHist[i]))
+
+            }
+        });
     }
 
     // cityUV function with query url of  openweather uvi api
@@ -73,18 +83,6 @@ $(document).ready(function () {
             $(".uv-index").text("UV Index: " + uvIndex)
         })
     }
-
-    // store seached cities history
-
-    
-
-
-
-
-
-
-
-
 
 });
 
