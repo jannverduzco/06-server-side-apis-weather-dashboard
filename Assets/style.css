@@ -15,11 +15,24 @@
   width: 100%; 
 }
 
-.city-button{
+.city-button {
   text-align: left;
   padding: 10px;
   border: 1px solid lightgrey;
   background-color: transparent;
   width: 100%;
-  
 }
+
+.city-weather-container {
+  /* border: 2px solid lightgrey; */
+  /* background-color: limegreen; */
+  margin-left: 40px ;
+}
+
+.fiveday-forecast-container {
+  background-color: blue;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+

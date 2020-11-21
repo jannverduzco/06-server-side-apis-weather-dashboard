@@ -118,6 +118,7 @@ $(document).ready(function () {
             method: "GET"
             // storing all the retrieved data inside function called "forecastRes"
         }).then(function (forecastRes) {
+            // empting weather forecast icons after appending them
             $("#icon1").empty()
             $("#icon2").empty()
             $("#icon3").empty()
@@ -134,6 +135,7 @@ $(document).ready(function () {
                 // console.log(humidity)
 
                 //tranfering content to HTML
+                $(".forecast-title").text("5-Day Forecast: ")
                 $("#" + "date" + i).text(tomorrowDate);
                 $("#" + "icon" + i).append(`<img src="http://openweathermap.org/img/wn/${icon}@2x.png"/>`);
                 $("#" + "temp" + i).text("Temp: " + temp);
