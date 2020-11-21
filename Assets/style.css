@@ -10,3 +10,18 @@
   padding: 20px;
 }
 
+.btn-container {
+  margin-top: 20px;
+  width: 100%; 
+  
+
+  
+}
+.city-button{
+  text-align: left;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  background-color: transparent;
+  width: 100%;
+  
+}

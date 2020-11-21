@@ -80,7 +80,7 @@ $(document).ready(function () {
         }).then(function (coordRes) {
             // retrieveing uvindex value
             var uvIndex = coordRes.value
-            // tranfering content to HTML
+            // tranfering content to HTMLKS
             $(".uv-index").text("UV Index: " + uvIndex)
         })
     }
@@ -90,12 +90,12 @@ $(document).ready(function () {
         // for loop to go though all cities searched for and create button
         var allCities = "";
         for (var i = 0; i < cityHist.length; i++) {
-            allCities += `<div class = "row"><button class="cityButton">${cityHist[i]}</button></div>`;
+            allCities += `<div class = "row"><button class="city-button">${cityHist[i]}</button></div>`;
         }
         // add cities creacted to html
         $("#cities-searched-display").html(allCities);
         // display city weather contect when city button is clicked
-        $(".cityButton").on("click", function () {
+        $(".city-button").on("click", function () {
             var cityList = this.textContent;
             // cityWeather function(line 40) call
             cityWeather(cityList)
