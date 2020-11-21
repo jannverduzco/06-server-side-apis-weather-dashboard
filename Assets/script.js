@@ -6,6 +6,7 @@ $(document).ready(function () {
     var apiKey = "&appid=463e991c43d34445395b82d02c5b4287"
     // city search array
     var cityHist = JSON.parse(localStorage.getItem("cityHistory")) || [];
+    var date = moment().format('MM/DD/YYYY')
 
 
     // LISTENERS
@@ -21,15 +22,30 @@ $(document).ready(function () {
             cityHist.unshift(citySearch)
             //converts cityHist array to string and setItem in storage   
             localStorage.setItem("cityHistory", JSON.stringify(cityHist))
+            displayPastCities();
         }
 
         // cityWeather function call
         cityWeather(citySearch)
+       
+    })
+    $(".city-button").on("click", function (event) {
+        event.preventDefault()
+        var citySearch = $("#city-search").val()
+        // pevernt from local storing same city multiple times
+        if (!cityHist.includes(citySearch)) {
+            // pushes new search to the front/top
+            cityHist.unshift(citySearch)
+            //converts cityHist array to string and setItem in storage   
+            localStorage.setItem("cityHistory", JSON.stringify(cityHist))
+            displayPastCities();
+        }
     })
 
 
     // FUNCTIONS
     // =======================================================================================
+
 
     // cityWeather function
     function cityWeather(city) {
@@ -54,16 +70,11 @@ $(document).ready(function () {
             var cityName = weatherRes.name;
 
             // tranfering content to HTML
-            $(".city-name").html("<h2>" + weatherRes.name + "<h2>");
+            $(".city-name").html("<h2>" + weatherRes.name + "(" + date + ")" + "<h2>" + weatherRes.weather[0].icon);
             $(".temp").text("Temperature: " + temp + "°F");
             $(".humidity").text("Humidity: " + weatherRes.main.humidity + "%");
             $(".wind-speed").text("Wind Speed: " + weatherRes.wind.speed + "MPH");
 
-            // dispaly searched cities
-            for (var i = 0; i < cityHist.length; i++) {
-                $("cities-searched-display").val(localStorage.getItem(cityHist[i]))
-
-            }
         });
     }
 
@@ -83,6 +94,29 @@ $(document).ready(function () {
             $(".uv-index").text("UV Index: " + uvIndex)
         })
     }
+
+    // dispaly searched cities
+    function displayPastCities() {
+        var allCities = "";
+
+        for (var i = 0; i < cityHist.length; i++) {
+            // var city = localStorage.getItem(cityHist[i])                
+            allCities += `<button>${cityHist[i]}</button>`;
+            console.log(cityHist[i])
+        }
+        
+        $(".cities-searched-display").html(allCities);
+        
+
+        console.log(allCities)
+    }
+
+    displayPastCities();
+
+
+
+
+
 
 });
 
