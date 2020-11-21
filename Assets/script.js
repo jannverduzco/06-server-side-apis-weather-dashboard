@@ -6,6 +6,7 @@ $(document).ready(function () {
     var apiKey = "&appid=463e991c43d34445395b82d02c5b4287"
     // city search array
     var cityHist = JSON.parse(localStorage.getItem("cityHistory")) || [];
+    // var declared moment.js date  format
     var date = moment().format('MM/DD/YYYY')
 
 
@@ -25,9 +26,9 @@ $(document).ready(function () {
             displayPastCities();
         }
 
-        // cityWeather function(line 39) call
+        // cityWeather function(line 40) call
         cityWeather(citySearch)
-        // forecastWeather function(line 120 ) call
+        // forecastWeather function(line 110 call)
         forecastWeather(citySearch)
 
     })
@@ -69,7 +70,6 @@ $(document).ready(function () {
 
     // cityUV function with query url of  openweather uvi api
     function cityUV(lat, lon) {
-
         var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + apiKey;
         // console.log(queryURL)
         // running ajax call to the openweather API
@@ -82,38 +82,28 @@ $(document).ready(function () {
             var uvIndex = coordRes.value
             // tranfering content to HTML
             $(".uv-index").text("UV Index: " + uvIndex)
-            // if { green
-
-            // }
-            // else if {yellow
-
-            // }
-            // else {red
-
-            // }
         })
     }
 
     // dispaly searched cities
     function displayPastCities() {
+        // for loop to go though all cities searched for and create button
         var allCities = "";
-        // for loop to go through all cities searched for
         for (var i = 0; i < cityHist.length; i++) {
             allCities += `<div class = "row"><button class="cityButton">${cityHist[i]}</button></div>`;
         }
-        // tranfer allcities array to HTML
+        // add cities creacted to html
         $("#cities-searched-display").html(allCities);
-        // listener that displays weather for city button clicked
+        // display city weather contect when city button is clicked
         $(".cityButton").on("click", function () {
             var cityList = this.textContent;
-            
-            // cityWeather function(line 39) call
+            // cityWeather function(line 40) call
             cityWeather(cityList)
-             // forecastWeather function(line 120 ) call
+            // forecastWeather function(line 110 call)
             forecastWeather(cityList)
-
+        })
     }
-    // displayPastCities(line 97) funtion called
+    // displayPastCities function(line 89) call
     displayPastCities();
 
     // forcast weather function
@@ -128,7 +118,6 @@ $(document).ready(function () {
             method: "GET"
             // storing all the retrieved data inside function called "forecastRes"
         }).then(function (forecastRes) {
-            // for loop to go though the 5 forcasted days
             for (var i = 1; i < 6; i++) {
                 var icon = forecastRes.list[i].weather[0].icon;
                 // retrieving temp and  converting it from Kelvin to fahrenheit 
@@ -143,7 +132,7 @@ $(document).ready(function () {
                 $("#" + "date" + i).text(tomorrowDate);
                 $("#" + "icon" + i).append(`<img src="http://openweathermap.org/img/wn/${icon}@2x.png"/>`);
                 $("#" + "temp" + i).text("Temp: " + temp);
-                $("#" + "humidity" + i).text("Humidity: " + humidity);
+                $("#" + "humidity" + i).text("Humidity:" + humidity);
             }
 
         });
