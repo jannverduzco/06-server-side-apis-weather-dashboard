@@ -118,6 +118,11 @@ $(document).ready(function () {
             method: "GET"
             // storing all the retrieved data inside function called "forecastRes"
         }).then(function (forecastRes) {
+            $("#icon1").empty()
+            $("#icon2").empty()
+            $("#icon3").empty()
+            $("#icon4").empty()
+            $("#icon5").empty()
             for (var i = 1; i < 6; i++) {
                 var icon = forecastRes.list[i].weather[0].icon;
                 // retrieving temp and  converting it from Kelvin to fahrenheit 
