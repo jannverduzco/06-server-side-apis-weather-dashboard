@@ -29,18 +29,6 @@ $(document).ready(function () {
         cityWeather(citySearch)
        
     })
-    $(".city-button").on("click", function (event) {
-        event.preventDefault()
-        var citySearch = $("#city-search").val()
-        // pevernt from local storing same city multiple times
-        if (!cityHist.includes(citySearch)) {
-            // pushes new search to the front/top
-            cityHist.unshift(citySearch)
-            //converts cityHist array to string and setItem in storage   
-            localStorage.setItem("cityHistory", JSON.stringify(cityHist))
-            displayPastCities();
-        }
-    })
 
 
     // FUNCTIONS
@@ -70,7 +58,8 @@ $(document).ready(function () {
             var cityName = weatherRes.name;
 
             // tranfering content to HTML
-            $(".city-name").html("<h2>" + weatherRes.name + "(" + date + ")" + "<h2>" + weatherRes.weather[0].icon);
+            $(".city-name").html("<h2>" + weatherRes.name + "(" + date + ")" + "<h2>");
+            $(".city-name").append(`<img src="http://openweathermap.org/img/wn/${weatherRes.weather[0].icon}@2x.png"/>`)
             $(".temp").text("Temperature: " + temp + "°F");
             $(".humidity").text("Humidity: " + weatherRes.main.humidity + "%");
             $(".wind-speed").text("Wind Speed: " + weatherRes.wind.speed + "MPH");
@@ -100,15 +89,17 @@ $(document).ready(function () {
         var allCities = "";
 
         for (var i = 0; i < cityHist.length; i++) {
-            // var city = localStorage.getItem(cityHist[i])                
-            allCities += `<button>${cityHist[i]}</button>`;
-            console.log(cityHist[i])
+               
+            allCities += `<div class = "row"><button class="cityButton">${cityHist[i]}</button></div>`;
+           
         }
-        
-        $(".cities-searched-display").html(allCities);
-        
+        $("#cities-searched-display").html(allCities);
+        $(".cityButton").on("click", function () {
+            var cityList = this.textContent;
+            cityWeather(cityList)
+        })
 
-        console.log(allCities)
+    
     }
 
     displayPastCities();
