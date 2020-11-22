@@ -29,10 +29,18 @@
   margin-left: 40px ;
 }
 
-.fiveday-forecast-container {
-  background-color: blue;
+.forecast-container {
   margin-top: 20px;
   margin-left: 40px;
+}
+
+.day-container {
+  background-color: rgb(27, 116, 250);
+  border-radius: 3px;
+  font-size: 18px;
+  color: white;
+  margin: 10px;
+
 }
 
 

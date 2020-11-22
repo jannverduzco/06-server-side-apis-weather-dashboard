@@ -138,8 +138,8 @@ $(document).ready(function () {
                 $(".forecast-title").text("5-Day Forecast: ")
                 $("#" + "date" + i).text(tomorrowDate);
                 $("#" + "icon" + i).append(`<img src="http://openweathermap.org/img/wn/${icon}@2x.png"/>`);
-                $("#" + "temp" + i).text("Temp: " + temp);
-                $("#" + "humidity" + i).text("Humidity:" + humidity);
+                $("#" + "temp" + i).text("Temp: " + temp + "°F");
+                $("#" + "humidity" + i).text("Humidity: " + humidity + "%");
             }
 
         });
