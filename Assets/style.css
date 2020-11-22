@@ -17,7 +17,6 @@
 .btn-container {
   /* box-model */
   margin-top: 20px;
-  margin-left: ;
   width: 100%; 
 }
 /* city seached history button style */
@@ -32,7 +31,6 @@
 /* current city real time weather box-model */
 .city-weather-container {
   margin-left: 40px ;
-  
 }
 
 /* 5-day forecast box-model */
@@ -50,6 +48,4 @@
   /* box-model */
   margin: 10px;
 }
-
-
 
