@@ -70,7 +70,7 @@ $(document).ready(function () {
 
     // cityUV function with query url of  openweather uvi api
     function cityUV(lat, lon) {
-        var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + apiKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + apiKey;
         // console.log(queryURL)
         // running ajax call to the openweather API
         $.ajax({
