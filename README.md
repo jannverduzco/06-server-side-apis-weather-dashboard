@@ -23,6 +23,10 @@ Janneth Alvarado Verduzco - janneth_verduzco@live.com
 
 ![weather dashboard](./Assets/Capture.JPG)
 
+![weather dashboard](./Assets/currentWeather.PNG)
+
+![weather dashboard](./Assets/fiveDayForecast.PNG)
+
 ## Live Link
 https://jannverduzco.github.io/06-server-side-apis-weather-dashboard/
 
