@@ -3,7 +3,21 @@
 ## Description
 
 The Weather Dashboard gives the user access to search for any city and obtain the temperature, humidity, wind speed and UV index in real time. The Weather Dashboard also displays the next 5 forecast days.
-This application also stores the users searched citys on the left column, with the most recent searched city on top. 
+This application also stores the users searched cities on the left column, with the most recent searched city on top. 
+
+## Contributors
+Janneth Alvarado Verduzco - janneth_verduzco@live.com
+
+## Language/Technologies Used
+* HTML5
+* CSS
+* JavaScript
+* jQuery
+* Font Awesome
+* Moment.js
+ 
+ ## API's
+ * Open Weather
 
 ## Mock-Up
 
